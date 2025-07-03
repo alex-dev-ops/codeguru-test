@@ -20,8 +20,6 @@ def obtener_clima(ciudad, api_key):
         print(f"Viento: {viento} m/s")
     else:
         print("❌ No se pudo obtener el clima. Verifica la ciudad o tu API key.")
-        
-
 # 🧪 Ejemplo de uso
 if __name__ == "__main__":
     ciudad = input("🔎 Ingresa la ciudad: ")
