@@ -20,7 +20,7 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v3
         with:
-          role-to-assume: arn:aws:iam::992382635843:oidc-provider/token.actions.githubusercontent.com
+          role-to-assume: arn:aws:iam::992382635843:role/codeguru
           aws-region: us-east-1  # o tu región preferida
 
       - name: Upload source code to S3
