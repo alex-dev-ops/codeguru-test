@@ -34,7 +34,7 @@ jobs:
           REVIEW=$(aws codegurureviewer create-code-review \
             --name "code-review-${{ github.run_id }}" \
             --type RepositoryAnalysis={RepositoryHead={BranchName=${{ github.head_ref }}}} \
-            --repository AssociationArn=arn:aws:codeguru-reviewer:::repository/GitHub/<OWNER>/<REPO> \
+            --repository AssociationArn=arn:aws:codeguru-reviewer:::repository/GitHub/alex-dev-ops/codeguru-test \
             --output json)
 
           echo "$REVIEW"
