@@ -18,8 +18,6 @@ def obtener_clima(ciudad, api_key):
         print(f"Sensación térmica: {sensacion}°C")
         print(f"Humedad: {humedad}%")
         print(f"Viento: {viento} m/s")
-    else:
-        print("❌ No se pudo obtener el clima. Verifica la ciudad o tu API key.")
 
 # 🧪 Ejemplo de uso
 if __name__ == "__main__":
