@@ -1,0 +1,41 @@
+name: CodeGuru Reviewer
+
+on:
+  pull_request:
+
+jobs:
+  codeguru-review:
+    name: Run CodeGuru Reviewer
+    runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          role-to-assume: arn:aws:iam::992382635843:oidc-provider/token.actions.githubusercontent.com
+          aws-region: us-east-1  # o tu región preferida
+
+      - name: Upload source code to S3
+        run: |
+          zip -r source.zip .
+          aws s3 cp source.zip s3://alex-tests223444/codeguru/source.zip
+
+      - name: Create CodeGuru Review
+        id: codeguru
+        run: |
+          REVIEW=$(aws codegurureviewer create-code-review \
+            --name "code-review-${{ github.run_id }}" \
+            --type RepositoryAnalysis={RepositoryHead={BranchName=${{ github.head_ref }}}} \
+            --repository AssociationArn=arn:aws:codeguru-reviewer:::repository/GitHub/<OWNER>/<REPO> \
+            --output json)
+
+          echo "$REVIEW"
+
